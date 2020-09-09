@@ -1,6 +1,7 @@
 <?php
 echo "\n";
 echo "Author: Jimmy Cheng \n \n";
+
 // 1. 6 * 6 multiplication table
 echo("1. \n");
 for($i = 1; $i <= 6; $i++){
@@ -8,32 +9,29 @@ for($i = 1; $i <= 6; $i++){
         $string = $i * $j;
         echo "$string ";
     }
+    echo "\n";
 }
-echo "\n \n";
+echo "\n";
 
 // 2. find first non-repeated character in a string
 echo("2. \n");
 function findDup($str){
     $arr = array();
+    $s = "can't find one!";
     for($i = 0; $i < strlen($str); $i++){
-        if(array_key_exists($str[$i], $arr)){
-            $arr[$str[$i]]++;
-        }
-        else{
-            $arr[$str[$i]] = 1;
+        if(substr_count($str, $str[$i]) === 1){
+            $s = $str[$i];
+            return $s;
         }
     }
-    for($j = 0; $j < strlen($str); $j++){
-        if($arr[$str[$j]] === 1){
-            echo "$str[$j] \n";
-            return $str[$j];
-        }
-    }
-    echo "can't find one \n";
-    return;
+    return $s;
 }
-findDup('Green');
-findDup('abcdea');
+echo findDup('Green');
+echo "\n";
+echo findDup('abcdea');
+echo "\n";
+echo findDup('aabb');
+echo "\n";
 echo "\n";
 
 // 3. return true if all values in an array is positive
@@ -41,15 +39,23 @@ echo("3. \n");
 function allPostive($arr){
     foreach ($arr as $value) {
         if($value < 0){
-            echo "False \n";
-            return false;
+            return False;
         }
     }
-    echo "True \n";
-    return true;
+    return True;
 }
-allPostive([2, 3, 4, 5]);
-allPostive([-1, 9, -4, 5]);
+// helper function
+function printPositive($arr){
+    $is_positive = allPostive($arr);
+    if($is_positive){
+        echo "True \n";
+    }
+    else{
+        echo "False \n";
+    }
+}
+printPositive([2, 3, 4, 5]);
+printPositive([-1, 9, -4, 5]);
 echo "\n";
 
 // 4. return the last even number in an array
@@ -61,11 +67,23 @@ function findEven($arr){
             $even = $value;
         }
     }
-    echo "$even \n";
+    if($even === "False"){
+        return False;
+    }
     return $even;
 }
-findEven([3,5,2,9,7,8,10, 1]);
-findEven([3,5]);
+// helper function
+function printEven($arr){
+    $s = findEven($arr);
+    if($s === False){
+        echo "False \n";
+    }
+    else {
+        echo "$s \n";
+    }
+}
+printEven([3,5,2,9,7,8,10, 1]);
+printEven([3,5]);
 echo "\n";
 
 // 5 . print capital of cities
@@ -80,25 +98,20 @@ echo "\n";
 echo("6. \n");
 function insertArr($arr, $index){
     array_splice($arr, $index + 1, 0, array('$'));
-    print_r ($arr);
     return $arr;
 }
-insertArr([1, 2, 3, 4, 5], 2);
+print_r(insertArr([1, 2, 3, 4, 5], 2));
 echo "\n";
 
 // 7. print reversed equilateral triangle 
 echo "7.\n";
 function printTrig($n){
     for($i = 1; $i <= $n; $i++){
-        for($j = 1; $j <= $i; $j++){
-            echo "*";
-        }
+        echo str_repeat("*", $i);
         echo "\n";
     }
     for($i = $n; $i >= 1; $i--){
-        for($j = $i; $j >= 1; $j--){
-            echo "*";
-        }
+        echo str_repeat("*", $i);
         echo "\n";
     }
 }
