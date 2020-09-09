@@ -17,21 +17,27 @@ echo "\n";
 echo("2. \n");
 function findDup($str){
     $arr = array();
-    $s = "can't find one!";
     for($i = 0; $i < strlen($str); $i++){
         if(substr_count($str, $str[$i]) === 1){
             $s = $str[$i];
             return $s;
         }
     }
-    return $s;
+    return False;
 }
-echo findDup('Green');
-echo "\n";
-echo findDup('abcdea');
-echo "\n";
-echo findDup('aabb');
-echo "\n";
+// helper function
+function printDup($str){
+    $dup = findDup($str);
+    if($dup){
+        echo "$dup \n";
+    }
+    else{
+        echo "False \n";
+    }
+}
+printDup('Green');
+printDup('abcdea');
+printDup('aabb');
 echo "\n";
 
 // 3. return true if all values in an array is positive
@@ -67,9 +73,6 @@ function findEven($arr){
             $even = $value;
         }
     }
-    if($even === "False"){
-        return False;
-    }
     return $even;
 }
 // helper function
@@ -82,7 +85,7 @@ function printEven($arr){
         echo "$s \n";
     }
 }
-printEven([3,5,2,9,7,8,10, 1]);
+printEven([3,5,2,9,7,8,10,1]);
 printEven([3,5]);
 echo "\n";
 
